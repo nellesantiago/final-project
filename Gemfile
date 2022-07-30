@@ -62,3 +62,7 @@ gem 'net-pop', require: false
 gem 'devise'
 
 gem 'mailjet'
+
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-rails_csrf_protection'
