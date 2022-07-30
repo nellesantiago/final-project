@@ -1,3 +1,46 @@
-<%= user_signed_in? %>
-
-<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<div class="home">
+  <header>
+    <nav>
+      <div class="side">
+        <%= image_tag "logo.png" %>
+        <ul>
+          <li>About</li>
+          <li>Pricing</li>
+          <li>Resources</li>
+          <li>Support</li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <input type="text" placeholder="Find a creator" class="search">
+        <%= link_to "Log in", new_user_session_path, class: "login" %>
+        <%= link_to "Create on Likha", new_user_registration_path, class: "create"%>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="left">
+      <div class="slogan">Change the way art is valued</div>
+      <div class="texts">Let your most passionate fans support your creative work at the right price, and get the freedom to do your best work and the stability you need to build an independent creative career.</div>
+      <div class="options">
+        <%= link_to "Get started", new_user_registration_path, class: "get-started"%>
+        <div class="demo"><%= image_tag "play.png" %> Get a demo</div>
+      </div>
+      <div class="checklist">
+        <div class="check"><%= image_tag "check.png" %>Create what you want and what your audience loves.</div>
+        <div class="check"><%= image_tag "check.png" %>Build a direct, meaningful connection with your audience</div>
+        <div class="check"><%= image_tag "check.png" %>Earn while doing what you love.</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="container">
+        <div class="left">
+          <%=image_tag "photographer.png" %>
+        </div>
+        <div class="right">
+          <%= image_tag "artist.png" %>
+          <%= image_tag "writer.png" %>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
