@@ -53,7 +53,7 @@
                 <div class="actions">
                   <%= f.submit "Create an account" %>
                 </div>
-                <%= button_to user_google_oauth2_omniauth_authorize_path, class: "google" do %>
+                <%= link_to user_google_oauth2_omniauth_authorize_path, class: "google", method: :post do %>
                   <%= image_tag "google.png" %> Sign up with Google
                 <% end %>
               <% end %>
