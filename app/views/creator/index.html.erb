@@ -11,5 +11,6 @@ My Posts
 
 <% @posts.each do |post| %>
     <h3><%= post.title %></h3>
+    <%= post.users_liked.count %>
     <%= link_to "Show", post %>
 <% end %>

@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :followings, through: :given_follows, source: :followed_user
   has_many :following_posts, through: :followings, source: :posts
 
+  has_many :likes
+  has_many :liked_posts, through: :likes, source: :post
 
   def followed?(user)
     !!self.given_follows.find_by(followed_id: user.id)

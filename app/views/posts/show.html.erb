@@ -11,6 +11,7 @@
 </p>
 
 <%= image_tag @post.content_image %>
+<%= @post.users_liked.count %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', creator_index_path %>
