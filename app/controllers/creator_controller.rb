@@ -3,6 +3,8 @@ class CreatorController < ApplicationController
     before_action :handle_user
 
     def index
+        @followers = current_user.followers
+        @posts = current_user.posts
     end
 
     private

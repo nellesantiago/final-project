@@ -1,1 +1,14 @@
 <h1>Creator</h1>
+<h1><%= current_user.email %></h1>
+<h1>Followers</h1>
+<% @followers.each do |user| %>
+    <h3><%= user.email %></h3>
+<% end %>
+
+<%= link_to 'New Post', new_post_path %>
+
+My Posts
+
+<% @posts.each do |post| %>
+    <h3><%= post.title%></h3>
+<% end %>
