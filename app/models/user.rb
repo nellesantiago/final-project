@@ -12,6 +12,7 @@ class User < ApplicationRecord
       user.first_name = provider_data.info.first_name
       user.last_name = provider_data.info.last_name
       user.username = "#{user.first_name}#{user.last_name}#{user.uid[0..2]}#{user.uid[5..7]}".downcase.delete(' ')
+      user.confirmed_at = Date.current
     end
   end
 
