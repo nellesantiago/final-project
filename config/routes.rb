@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root "home#index"
   resources :home, only: %i[index]
   resources :posts, except: %i[index]
+  resources :dashboard, only: %i[index]
+  resources :creator, only: %i[index]
 end

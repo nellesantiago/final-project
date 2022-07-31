@@ -15,5 +15,7 @@ class User < ApplicationRecord
     end
   end
 
+  enum role: {fan: 0, creator: 1, admin: 2}
+
   has_many :posts, dependent: :destroy
 end
