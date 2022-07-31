@@ -3,6 +3,9 @@ class DashboardController < ApplicationController
     before_action :handle_user
 
     def index
+        @followers = current_user.followers
+        @followings = current_user.followings
+        @posts = @followings.each
     end
 
     private

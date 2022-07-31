@@ -1,0 +1,9 @@
+<h1>Users</h1>
+<% @users.each do |user| %>
+  <h1><%= user.email %></h1>
+  <% if current_user.followed?(user) %>
+    <%= link_to "Unfollow", current_user.given_follows.find_by(followed_id: user.id), method: :delete %>
+  <% else %>
+  <%= render "layouts/follow", follow: @follow, follower_id: current_user.id, followed_id: user.id %>
+  <% end %>
+<% end %>
