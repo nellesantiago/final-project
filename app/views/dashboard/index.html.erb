@@ -6,3 +6,27 @@
  <h3><%= user.email %></h3>
 <%= link_to "Unfollow", current_user.given_follows.find_by(followed_id: user.id), method: :delete %>
 <% end %>
+
+<h1>Posts</h1>
+<% @posts.each do |post| %>
+    <h3><%= post.title %></h3>
+    <%= post.users_liked.count %>
+    <% if post.liked?(current_user) %>
+        <%= link_to "Unlike", post.likes.find_by(user_id: current_user.id), method: :delete %>
+    <% else %>
+        <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
+    <% end %>
+    <%= image_tag post.content_image %>
+<% end %>
+
+<h1>Liked Posts</h1>
+<% @liked_posts.each do |post| %>
+    <h3><%= post.title %></h3>
+    <%= post.users_liked.count %>
+    <% if post.liked?(current_user) %>
+        <%= link_to "Unlike", post.likes.find_by(user_id: current_user.id), method: :delete %>
+    <% else %>
+        <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
+    <% end %>
+    <%= image_tag post.content_image %>
+<% end %>

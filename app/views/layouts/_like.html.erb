@@ -1,0 +1,14 @@
+<%= form_with model: like, url: like_index_path do |form| %>
+
+  <div class="field">
+    <%= form.hidden_field :user_id, value: user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :post_id, value: post_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Like" %>
+  </div>
+<% end %>
