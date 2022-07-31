@@ -1,0 +1,14 @@
+<%= form_with model: follow, url: follow_index_path do |form| %>
+
+  <div class="field">
+    <%= form.hidden_field :follower_id, value: follower_id %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :followed_id, value: followed_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Follow" %>
+  </div>
+<% end %>

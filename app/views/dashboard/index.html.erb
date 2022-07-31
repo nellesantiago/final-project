@@ -1,1 +1,8 @@
 <h1>fan</h1>
+<h1><%= current_user.email %></h1>
+
+<h1>Following</h1>
+<% @followings.each do |user| %>
+ <h3><%= user.email %></h3>
+<%= link_to "Unfollow", current_user.given_follows.find_by(followed_id: user.id), method: :delete %>
+<% end %>
