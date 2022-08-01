@@ -1,32 +1,73 @@
-<h1>fan</h1>
-<h1><%= current_user.email %></h1>
-
-<h1>Following</h1>
-<% @followings.each do |user| %>
- <h3><%= user.email %></h3>
-<%= link_to "Unfollow", current_user.given_follows.find_by(followed_id: user.id), method: :delete %>
-<% end %>
-
-<h1>Posts</h1>
-<% @posts.each do |post| %>
-    <h3><%= post.title %></h3>
-    <%= post.users_liked.count %>
-    <% if post.liked?(current_user) %>
-        <%= link_to "Unlike", post.likes.find_by(user_id: current_user.id), method: :delete %>
-    <% else %>
-        <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
-    <% end %>
-    <%= image_tag post.content_image %>
-<% end %>
-
-<h1>Liked Posts</h1>
-<% @liked_posts.each do |post| %>
-    <h3><%= post.title %></h3>
-    <%= post.users_liked.count %>
-    <% if post.liked?(current_user) %>
-        <%= link_to "Unlike", post.likes.find_by(user_id: current_user.id), method: :delete %>
-    <% else %>
-        <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
-    <% end %>
-    <%= image_tag post.content_image %>
-<% end %>
+<div class="dashboard">
+  <header>
+    <nav>
+      <div class="side">
+        <%= image_tag "logo.png" %>
+        <ul>
+          <li>Feed</li>
+          <li>Creators</li>
+          <li>Portfolio</li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <input type="text" placeholder="Find a creator" class="search">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <%= image_tag "avatar.png" %>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Be a creator</a>
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="left">
+      <div class="title">Creators you follow</div>
+      <div class="list">
+        <% if @followings.blank? %>
+          Start following a creator now!
+        <% else %>
+          <% @followings.each do |user| %>
+            <div class="email"><%= user.email %></div>
+            <%= link_to "Unfollow", current_user.given_follows.find_by(followed_id: user.id), method: :delete %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="right">
+      <div class="greetings">
+        Hello, <%= current_user.first_name %>!
+      </div>
+      <div class="options">
+        <input type="radio" id="feed" checked="true">
+        <label class="feed-label" for="feed">Feed</label>
+        <% @posts.each do |post| %>
+          <span><%= post.title %></span>
+          <%= post.users_liked.count %>
+          <% if post.liked?(current_user) %>
+            <%= link_to "Unlike", post.likes.find_by(user_id: current_user.id), method: :delete %>
+          <% else %>
+            <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
+          <% end %>
+          <%= image_tag post.content_image %>
+        <% end %>
+        <input type="radio" id="liked-post">
+        <label class="liked-post-label" for="liked-post">Liked Posts</label>
+        <% @liked_posts.each do |post| %>
+          <span><%= post.title %></span>
+          <%= post.users_liked.count %>
+          <% if post.liked?(current_user) %>
+            <%= link_to "Unlike", post.likes.find_by(user_id: current_user.id), method: :delete %>
+          <% else %>
+            <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
+          <% end %>
+          <%= image_tag post.content_image %>
+        <% end %>
+      </div>
+    </div>
+  </main>
+</div>
