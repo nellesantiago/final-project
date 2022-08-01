@@ -1,16 +1,41 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+<div class="confirmation">
+  <header>
+    <nav>
+      <div class="side">
+        <%= image_tag "logo.png" %>
+        <ul>
+          <li>About</li>
+          <li>Pricing</li>
+          <li>Resources</li>
+          <li>Support</li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <input type="text" placeholder="Find a creator" class="search">
+        <%= link_to "Sign up", new_user_registration_path, class: "create"%>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="left">
+      <%= image_tag "forgot.png"%>
+    </div>
+    <div class="right">
+      <div class="container">
+        <div class="title">Forgot password</div>
+        <div class="form">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <div class="field">
+              <%= f.email_field :email, placeholder: "Email address", autocomplete: "email" %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Send me reset password instructions" %>
+            </div>
+          <% end %>
+          <%= render "users/shared/links"%>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

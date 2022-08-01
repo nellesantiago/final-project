@@ -1,0 +1,142 @@
+.confirmation {
+    padding: 50px 120px;
+  
+    img {
+      width: 100px;
+    }
+  
+    header {
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        .side {
+          display: flex;
+          align-items: center;
+  
+          ul li {
+            list-style-type: none;
+            display: inline-flex;
+            margin-left: 30px;
+          }
+  
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+  
+        .buttons {
+          display: flex;
+          align-items: center;
+  
+          .search {
+            background-color: #e4e4e4;
+            height: 40px;
+            border-radius: 20px;
+            width: 220px;
+            outline: none;
+            border: none;
+            padding: 0 20px;
+            color: black;
+            margin-right: 10px;
+          }
+  
+          .create {
+            background-color: #ffe606;
+            color: black;
+            text-decoration: none;
+            border-radius: 20px;
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+  
+            &:hover {
+              background-color: black;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 70px;
+      padding-left: 50px;
+  
+      .left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 550px;
+        }
+      }
+  
+      .right {
+        margin-top: 100px;
+        .container {
+          text-align: center;
+          line-height: 1.5;
+          background-color: white;
+          padding: 50px;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          width: 500px;
+  
+          .title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 30px;
+          }
+  
+          input[type='email'] {
+            border: none;
+            outline: none;
+            height: 50px;
+            width: 100%;
+            padding: 0 20px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            margin: 5px 0;
+          }
+  
+          input[type='submit'] {
+            width: 100%;
+            background-color: #ffe606;
+            height: 50px;
+            border: none;
+            outline: none;
+            border-radius: 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            margin-bottom: 40px;
+  
+            &:hover {
+              background-color: black;
+              color: white;
+            }
+          }
+  
+          a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+  
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+  
