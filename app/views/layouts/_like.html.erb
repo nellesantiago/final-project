@@ -8,7 +8,9 @@
     <%= form.hidden_field :post_id, value: post_id %>
   </div>
 
-  <div class="actions">
-    <%= form.submit "Like" %>
-  </div>
+  <span class="actions">
+    <%= button_tag :submit do %>
+    <%= image_tag "unlike.png"%>
+    <% end %>
+  </span>
 <% end %>

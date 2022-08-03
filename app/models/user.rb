@@ -33,4 +33,8 @@ class User < ApplicationRecord
   def followed?(user)
     !!self.given_follows.find_by(followed_id: user.id)
   end
+
+  def like(post)
+    
+  end
 end
