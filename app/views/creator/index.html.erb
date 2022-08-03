@@ -65,6 +65,9 @@
         <div class="count"><%= current_user.followers.count %></div>
       </div>
       <div class="list">
+      <% if @followers.blank? %>
+          <div class="blank">No followers</div>
+        <% else %>
         <% @followers.each do |follower| %>
           <div class="follower">
             <%= image_tag "image.png" %>
@@ -77,6 +80,7 @@
               </div>
             </div>
           </div>
+        <% end %>
         <% end %>
       </div>
     </div>
