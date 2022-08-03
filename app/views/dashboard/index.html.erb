@@ -29,10 +29,10 @@
       <div class="category">Creators you follow</div>
       <div class="list">
         <% if @followings.blank? %>
-          Start following a creator now!
+          <div class="blank">Start following a creator now!</div>
         <% else %>
           <% @followings.each do |user| %>
-            <div class="creator">
+            <div class="creator-list">
               <%= image_tag "image.png" %>
               <div class="details">
                 <div class="name">
@@ -51,6 +51,9 @@
     <div class="middle">
       <div class="category">Feed</div>
       <div class="feed">
+      <% if @posts.blank? %>
+          <div class="blank">No posts to show</div>
+        <% else %>
         <% @posts.each do |post| %>
           <div class="post">
             <div class="user">
@@ -80,17 +83,21 @@
                   <%= pluralize(post.users_liked.count, "fan") %>
                 <% end %>
               </div>
-              <div class="post-title">
-                <%= post.title %>
+              <div class="post-date">
+                <%= post.created_at.strftime("%b %m, %Y") %>
               </div>
             </div>
           </div>
+        <% end %>
         <% end %>
       </div>
     </div>
     <div class="right">
       <div class="category">Recently liked</div>
       <div class="liked-posts">
+      <% if @liked_posts.blank? %>
+          <div class="blank">No liked posts</div>
+        <% else %>
         <% @liked_posts.order(created_at: :asc).each do |post| %>
           <div class="list">
             <div class="image">
@@ -116,6 +123,7 @@
               </div>
             </div>
           </div>
+        <% end %>
         <% end %>
       </div>
     </div>

@@ -227,6 +227,17 @@
       }
 
       .list {
+        height: 100%;
+        .blank {
+            display: flex;
+            height: 80%;
+            width: 100%;
+            align-items: center;
+            color: grey;
+            font-size: 14px;
+            justify-content: center;
+          }
+
         .follower {
           display: flex;
           padding: 10px 20px;
