@@ -68,15 +68,19 @@
                 </div>
               </div>
             </div>
-            <div class="image">
+            <%= link_to dashboard_path(post), class: "image" do %>
               <%= image_tag post.content_image, class: "img" %>
-            </div>
+            <% end %>
             <div class="others">
               <div class="like">
                 <% if post.liked?(current_user) %>
                   <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete do %>
                     <%= image_tag "like.png" %>
+                    <% if post.users_liked.count == 1 %>
+                    You
+                    <% else %>
                     You and <%= pluralize(post.users_liked.count, "fan") %>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
@@ -98,7 +102,7 @@
       <% if @liked_posts.blank? %>
           <div class="blank">No liked posts</div>
         <% else %>
-        <% @liked_posts.order(created_at: :asc).each do |post| %>
+        <% @liked_posts.reverse.each do |post| %>
           <div class="list">
             <div class="image">
               <%= image_tag post.content_image, class: "img" %>
