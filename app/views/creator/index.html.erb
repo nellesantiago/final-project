@@ -1,16 +1,84 @@
-<h1>Creator</h1>
-<h1><%= current_user.email %></h1>
-<h1>Followers</h1>
-<% @followers.each do |user| %>
-    <h3><%= user.email %></h3>
-<% end %>
-
-<%= link_to 'New Post', new_post_path %>
-
-My Posts
-
-<% @posts.each do |post| %>
-    <h3><%= post.title %></h3>
-    <%= post.users_liked.count %>
-    <%= link_to "Show", post %>
-<% end %>
+<div class="creator">
+  <header>
+    <nav>
+      <div class="side">
+        <div class="user">
+          <%= image_tag "image.png" %>
+          <div class="details">
+            <div class="name">
+              <%= current_user.first_name%> <%= current_user.last_name %>
+            </div>
+            <div class="username">
+              @<%= current_user.username %>
+            </div>
+          </div>
+          <div class="creator-title">
+            creator
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <%= image_tag "logo.png" %>
+          </button>
+          <div class="dropdown-content">
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="posts">
+      <div class="nav">
+        <div class="category">Posts</div>
+        <%= link_to '+ Add', new_post_path %>
+      </div>
+      <div class="feed">
+        <% @posts.each do |post| %>
+          <%= link_to post, class: "post" do%>
+            <div class="image">
+              <%= image_tag post.content_image %>
+            </div>
+            <div class="others">
+              <div class="details">
+                <div class="title"><%= post.title %></div>
+                <div class="likes">
+                  <%= image_tag "like.png" %>
+                  <%= pluralize(post.users_liked.count, "like") %>
+                </div>
+              </div>
+              <div class="price">
+                <%= image_tag "price-tag.png" %>
+                <div class="amount">₱<%= post.price %></div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="followers">
+      <div class="nav">
+        <div class="category">Followers</div>
+        <div class="count"><%= current_user.followers.count %></div>
+      </div>
+      <div class="list">
+        <% @followers.each do |follower| %>
+          <div class="follower">
+            <%= image_tag "image.png" %>
+            <div class="details">
+              <div class="name">
+                <%= follower.first_name %> <%= follower.last_name %>
+              </div>
+              <div class="username">
+                @<%= follower.username %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+</div>
