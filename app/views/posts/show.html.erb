@@ -1,17 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency(@post.price, unit: "₱") %>
-</p>
-
-<%= image_tag @post.content_image %>
-<%= @post.users_liked.count %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', creator_index_path %>
+<div class="show-post">
+  <div class="overlay">
+    <div class="container">
+      <div class="nav">
+        <%= link_to creator_index_path do %>
+          <%= image_tag "show-back.png" %>
+        <% end %>
+        <%= image_tag "logo.png" %>
+      </div>
+      <main>
+        <div class="image">
+          <%= image_tag @post.content_image %>
+        </div>
+        <div class="details">
+          <div class="title"><%= @post.title %> </div>
+          <div class="likes">
+            <%= image_tag "like.png" %>
+            <%= pluralize(@post.users_liked.count, "fan")%>
+          </div>
+          <div class="price">₱<%= @post.price %><br><span>for this image</span> </div>
+          <%= link_to 'Edit', edit_post_path(@post) %>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
