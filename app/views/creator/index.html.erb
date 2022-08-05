@@ -3,7 +3,11 @@
     <nav>
       <div class="side">
         <div class="user">
-          <%= image_tag "image.png" %>
+          <% if current_user.image.nil? %>
+            <%= image_tag "image.png" %>
+            <% else %>
+            <%= image_tag current_user.image %>
+            <% end %>
           <div class="details">
             <div class="name">
               <%= current_user.first_name%> <%= current_user.last_name %>
@@ -70,7 +74,11 @@
         <% else %>
         <% @followers.each do |follower| %>
           <div class="follower">
+            <% if follower.image.nil? %>
             <%= image_tag "image.png" %>
+            <% else %>
+            <%= image_tag follower.image %>
+            <% end %>
             <div class="details">
               <div class="name">
                 <%= follower.first_name %> <%= follower.last_name %>

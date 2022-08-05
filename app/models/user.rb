@@ -12,7 +12,8 @@ class User < ApplicationRecord
       user.first_name = provider_data.info.first_name
       user.last_name = provider_data.info.last_name
       user.username = "#{user.first_name}#{user.last_name}#{user.uid[0..2]}#{user.uid[5..7]}".downcase.delete(' ')
-      user.confirmed_at = Date.current
+      user.skip_confirmation!
+      user.image = provider_data.info.image
     end
   end
 
@@ -27,8 +28,10 @@ class User < ApplicationRecord
   has_many :followings, through: :given_follows, source: :followed_user
   has_many :following_posts, through: :followings, source: :posts
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
+
+  has_one_attached :content_image
 
   def followed?(user)
     !!self.given_follows.find_by(followed_id: user.id)
