@@ -13,11 +13,19 @@
         <input type="text" placeholder="Find a creator" class="search">
         <div class="dropdown">
           <button class="dropbtn">
-            <%= image_tag "avatar.png" %>
+          <% if current_user.image.blank? %>
+            <%= image_tag "image.png" %>
+            <% else %>
+            <%= image_tag current_user.image %>
+            <% end %>
           </button>
           <div class="dropdown-content">
             <a href="#">Be a creator</a>
+            <% if current_user.provider.blank? %>
             <%= link_to "Settings", edit_user_registration_path %>
+            <% else %>
+            
+            <% end %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete%>
           </div>
         </div>
@@ -33,7 +41,11 @@
         <% else %>
           <% @followings.each do |user| %>
             <div class="creator-list">
-              <%= image_tag "image.png" %>
+              <% if user.image.nil? %>
+            <%= image_tag "image.png" %>
+            <% else %>
+            <%= image_tag user.image %>
+            <% end %>
               <div class="details">
                 <div class="name">
                   <%= user.first_name %> <%= user.last_name %>
@@ -57,7 +69,11 @@
         <% @posts.each do |post| %>
           <div class="post">
             <div class="user">
-              <%= image_tag "image.png" %>
+              <% if post.user.image.nil? %>
+            <%= image_tag "image.png" %>
+            <% else %>
+            <%= image_tag post.user.image %>
+            <% end %>
               <div class="details">
                 <div class="name">
                   <%= post.user.first_name %>
