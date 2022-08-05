@@ -9,6 +9,25 @@
   <div class="form">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
+      <div class="username">
+        <%= f.label :username %><br />
+        <%= f.text_field :username %>
+        <div class="close">x</div>
+      </div>
+      <div class="change">Change username</div>
+      
+      <div class="field">
+        <%= f.label :first_name %><br />
+        <%= f.text_field :first_name %>
+      </div>
+      <div class="field">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name %>
+      </div>
+      <div class="field">
+        <%= f.label :content_image %><br />
+        <%= f.file_field :content_image %>
+      </div>
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autocomplete: "email" %>
