@@ -1,0 +1,16 @@
+<h1>Posts</h1>
+
+<% @posts.each do |post|%>
+    <p><%= post.title %></p>
+    <p><%= post.description %></p>
+    <%= image_tag post.content_image if post.content_image.attached? %>
+    <%= link_to "Show", post %>
+    <%= link_to "Delete", post, method: :delete %>
+    <% post.comments.each do |comment| %>
+        <p><%= comment.user.email %></p>
+        <p><%= comment.message %></p>
+    <% end %>
+    <%= render "comments/form", comment: @comment, post: post %>
+<% end %>
+
+<%= link_to "New Post", new_post_path %>

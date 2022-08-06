@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :check_user
+
+  def index
+    @posts = Post.all
+    @comment = Comment.new
+  end
 
   # GET /posts/1 or /posts/1.json
   def show
@@ -8,7 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = current_user.posts.build
+    @post = Post.new
   end
 
   # GET /posts/1/edit
@@ -17,7 +23,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = current_user.posts.build(post_params)
+    @post = Post.new(post_params)
 
     if @post.save
       redirect_to post_url(@post), notice: "Post was successfully created." 
@@ -45,11 +51,15 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = current_user.posts.find(params[:id])
+      @post = Post.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :price, :user_id, :content_image)
+      params.require(:post).permit(:title, :description, :content_image)
+    end
+
+    def check_user
+      redirect_to dashboard_index_path unless current_user.admin?
     end
 end
