@@ -1,16 +1,86 @@
-<h1>Posts</h1>
-
-<% @posts.each do |post|%>
-    <p><%= post.title %></p>
-    <p><%= post.description %></p>
-    <%= image_tag post.content_image if post.content_image.attached? %>
-    <%= link_to "Show", post %>
-    <%= link_to "Delete", post, method: :delete %>
-    <% post.comments.each do |comment| %>
-        <p><%= comment.user.email %></p>
-        <p><%= comment.message %></p>
-    <% end %>
-    <%= render "comments/form", comment: @comment, post: post %>
-<% end %>
-
-<%= link_to "New Post", new_post_path %>
+<div class="posts">
+  <header>
+    <nav>
+      <div class="left">
+        <%= image_tag "logo.png", class: "logo" %>
+        <ul>
+          <li>Home</li>
+          <li>Fans</li>
+          <li>Transactions</li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <% if current_user.image.blank? %>
+              <%= image_tag "profile.jpg" %>
+            <% else %>
+              <%= image_tag current_user.image %>
+            <% end %>
+          </button>
+          <div class="dropdown-content">
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="sticky">
+      <div class="banner"></div>
+      <div class="creator">
+        <% if current_user.image.blank? %>
+          <%= image_tag "profile.jpg" %>
+        <% else %>
+          <%= image_tag @creator.image %>
+        <% end %>
+        <div class="name">
+          <%= @creator.first_name %> <%= @creator.last_name %>
+        </div>
+        <div class="username">
+          @<%= @creator.username %>
+        </div>
+        <div class="data">
+          <div class="post-count count">
+            <div class="number"><%= @total_posts %></div>
+            <div class="label">Posts</div>
+          </div>
+          <div class="fan-count count">
+            <div class="number"><%= @total_fans %></div>
+            <div class="label">Fans</div>
+          </div>
+          <div class="like-count count">
+            <div class="number"><%= @total_likes %></div>
+            <div class="label">Likes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="feed">
+        <div class="title">
+          <div class="name">Artworks</div>
+          <%= link_to "+ New", new_post_path %>
+        </div>
+        <div class="posts">
+          <% @posts.reverse.each do |post| %>
+            <%= link_to post, class: "post" do %>
+              <%= image_tag post.content_image %>
+              <div class="like-comment">
+                <div class="like">
+                  <%= image_tag "unlike.png" %>
+                  <%= post.users_liked.count %>
+                </div>
+                <div class="comment">
+                  <%= image_tag "comment.png" %>
+                  <%= post.comments.count %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -6,6 +6,10 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @comment = Comment.new
+    @creator = User.find_by(role: "admin")
+    @total_likes = Like.all.count
+    @total_fans = User.where.not(role: "admin").count
+    @total_posts = @posts.count
   end
 
   # GET /posts/1 or /posts/1.json
