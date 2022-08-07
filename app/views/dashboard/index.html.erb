@@ -1,31 +1,25 @@
 <div class="dashboard">
   <header>
     <nav>
-      <div class="side">
-        <%= image_tag "logo.png" %>
+      <div class="left">
+        <%= image_tag "logo.png", class: "logo" %>
         <ul>
           <li>Feed</li>
-          <li>Creators</li>
-          <li>Portfolio</li>
+          <li>Plans</li>
+          <li>Liked Posts</li>
         </ul>
       </div>
-      <div class="buttons">
-        <input type="text" placeholder="Find a creator" class="search">
+      <div class="right">
         <div class="dropdown">
           <button class="dropbtn">
-          <% if current_user.image.blank? %>
-            <%= image_tag "image.png" %>
+            <% if current_user.image.blank? %>
+              <%= image_tag "image.png" %>
             <% else %>
-            <%= image_tag current_user.image %>
+              <%= image_tag current_user.image %>
             <% end %>
           </button>
           <div class="dropdown-content">
-            <a href="#">Be a creator</a>
-            <% if current_user.provider.blank? %>
             <%= link_to "Settings", edit_user_registration_path %>
-            <% else %>
-            
-            <% end %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete%>
           </div>
         </div>
@@ -33,120 +27,76 @@
     </nav>
   </header>
   <main>
-    <div class="left">
-      <div class="category">Creators you follow</div>
-      <div class="list">
-        <% if @followings.blank? %>
-          <div class="blank">Start following a creator now!</div>
-        <% else %>
-          <% @followings.each do |user| %>
-            <div class="creator-list">
-              <% if user.image.nil? %>
-            <%= image_tag "image.png" %>
-            <% else %>
-            <%= image_tag user.image %>
-            <% end %>
+    <div class="feed">
+      <% @posts.reverse.each do |post| %>
+        <div class="post">
+          <div class="top">
+            <div class="left">
+              <%= image_tag @creator.image %>
               <div class="details">
                 <div class="name">
-                  <%= user.first_name %> <%= user.last_name %>
+                  <%= @creator.first_name %> <%= @creator.last_name %>
                 </div>
                 <div class="username">
-                  @<%= user.username %>
+                  @<%= @creator.username %>
                 </div>
               </div>
-              <%= link_to "Unfollow", current_user.given_follows.find_by(followed_id: user.id), method: :delete %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="middle">
-      <div class="category">Feed</div>
-      <div class="feed">
-      <% if @posts.blank? %>
-          <div class="blank">No posts to show</div>
-        <% else %>
-        <% @posts.each do |post| %>
-          <div class="post">
-            <div class="user">
-              <% if post.user.image.nil? %>
-            <%= image_tag "image.png" %>
-            <% else %>
-            <%= image_tag post.user.image %>
-            <% end %>
-              <div class="details">
-                <div class="name">
-                  <%= post.user.first_name %>
-                  <%= post.user.last_name %>
+              <div class="right">
+                <div class="date">
                 </div>
-                <div class="username">
-                  @<%= post.user.username %>
-                </div>
-              </div>
-            </div>
-            <%= link_to dashboard_path(post), class: "image" do %>
-              <%= image_tag post.content_image, class: "img" %>
-            <% end %>
-            <div class="others">
-              <div class="like">
-                <% if post.liked?(current_user) %>
-                  <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete do %>
-                    <%= image_tag "like.png" %>
-                    <% if post.users_liked.count == 1 %>
-                    You
-                    <% else %>
-                    You and <%= pluralize(post.users_liked.count, "fan") %>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                  <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
-                  <%= pluralize(post.users_liked.count, "fan") %>
-                <% end %>
-              </div>
-              <div class="post-date">
-                <%= post.created_at.strftime("%b %m, %Y") %>
               </div>
             </div>
           </div>
-        <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="right">
-      <div class="category">Recently liked</div>
-      <div class="liked-posts">
-      <% if @liked_posts.blank? %>
-          <div class="blank">No liked posts</div>
-        <% else %>
-        <% @liked_posts.reverse.each do |post| %>
-          <div class="list">
-            <div class="image">
-              <%= image_tag post.content_image, class: "img" %>
-            </div>
-            <div class="user">
-              <div class="name">
-                <%= post.title %>
+          <div class="middle">
+            <%= link_to dashboard_path(post.id) do %>
+              <%= image_tag post.content_image %>
+            <% end %>
+          </div>
+          <div class="bottom">
+            <div class="details-wrapper">
+              <div class="buttons">
+                <div class="left-button">
+                  <div class="like">
+                    <div class="like-button">
+                      <% if post.liked?(current_user) %>
+                        <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete do %>
+                          <%= image_tag "like.png" %>
+                        <% end %>
+                      <% else %>
+                        <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
+                      <% end %>
+                    </div>
+                    <div class="count-like"></div>
+                  </div>
+                  <%= image_tag "comment.png" %>
+                  <%= image_tag "send.png" %>
+                </div>
+                <div class="right-button">
+                  <%= image_tag "save.png" %>
+                </div>
               </div>
-              <div class="username">
-                @<%= post.user.username %>
-              </div>
-            </div>
-            <div class="others">
-              <div class="like">
-                <% if post.liked?(current_user) %>
-                  <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete do %>
-                    <%= image_tag "like.png" %>
-                  <% end %>
+              <div class="down">
+                <% if post.users_liked.blank? %>
                 <% else %>
-                  <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
+                  <div class="liked-by">
+                    Liked by <span><%= pluralize(post.users_liked.count, "fan") %></span>
+                  </div>
                 <% end %>
               </div>
+              <div class="post-details">
+                <span><%= post.title %></span> <%= post.description %>
+              </div>
+              <div class="date">
+                <%= distance_of_time_in_words(DateTime.now, post.created_at) %> ago 
+              </div>
             </div>
+            <%= link_to dashboard_path(post.id), class: "comment" do %>
+              <%= image_tag current_user.image %>
+              <%= render "comments/form", comment: Comment.new, post: post%>
+            <% end %>
           </div>
-        <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
-  </div>
-</main>
+  </main>
 </div>
