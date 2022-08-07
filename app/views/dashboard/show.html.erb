@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="container">
       <div class="nav">
-        <%= link_to creator_index_path do %>
+        <%= link_to dashboard_index_path do %>
           <%= image_tag "show-back.png" %>
         <% end %>
         <%= image_tag "logo.png" %>
@@ -17,8 +17,7 @@
             <%= image_tag "like.png" %>
             <%= pluralize(@post.users_liked.count, "fan")%>
           </div>
-          <div class="price">₱<%= @post.price %><br><span>for this image</span> </div>
-          <%= link_to 'Buy', "#" %>
+          <div class="price"><%= @post.description %></div>
         </div>
       </div>
     </main>
