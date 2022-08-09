@@ -66,3 +66,5 @@ gem 'mailjet'
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-rails_csrf_protection'
+
+gem "faraday", "~> 2.4"

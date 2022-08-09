@@ -26,6 +26,11 @@
     <%= form.file_field :content_image %>
   </div>
 
+  <div class="field">
+    <%= form.label :scope %>
+    <%= form.select :scope, options_for_select(["Supporter", "Patron", "Benefactor"]) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
