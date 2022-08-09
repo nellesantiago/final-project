@@ -18,6 +18,7 @@ class User < ApplicationRecord
   end
 
   enum role: {fan: 0, admin: 1}
+  enum plan: {supporter: 0, patron: 1, benefactor: 2}
 
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
