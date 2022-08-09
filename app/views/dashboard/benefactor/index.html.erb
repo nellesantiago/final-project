@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="middle">
-            <%= link_to dashboard_path(post.id) do %>
+            <%= link_to dashboard_benefactor_path(post.id) do %>
               <%= image_tag post.content_image %>
             <% end %>
           </div>
@@ -90,7 +90,7 @@
                 <%= distance_of_time_in_words(DateTime.now, post.created_at) %> ago 
               </div>
             </div>
-            <%= link_to dashboard_path(post.id), class: "comment" do %>
+            <%= link_to dashboard_benefactor_path(post.id), class: "comment" do %>
               <%= image_tag current_user.image %>
               <%= render "comments/form", comment: Comment.new, post: post%>
             <% end %>

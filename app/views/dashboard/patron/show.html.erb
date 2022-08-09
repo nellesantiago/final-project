@@ -1,0 +1,25 @@
+<div class="show-post">
+  <div class="overlay">
+    <div class="container">
+      <div class="nav">
+        <%= link_to dashboard_index_path do %>
+          <%= image_tag "show-back.png" %>
+        <% end %>
+        <%= image_tag "logo.png" %>
+      </div>
+      <main>
+        <div class="image">
+          <%= image_tag @post.content_image %>
+        </div>
+        <div class="details">
+          <div class="title"><%= @post.title %> </div>
+          <div class="likes">
+            <%= image_tag "like.png" %>
+            <%= pluralize(@post.users_liked.count, "fan")%>
+          </div>
+          <div class="price"><%= @post.description %></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
