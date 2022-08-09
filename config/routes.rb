@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :home, only: %i[index]
   
   namespace :dashboard do
-    get "patron"
-    get "benefactor"
+    resources :patron, only: %i[index show]
+    resources :benefactor, only: %i[index show]
   end
   
   resources :dashboard, only: %i[index show]

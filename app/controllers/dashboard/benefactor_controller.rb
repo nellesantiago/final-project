@@ -1,8 +1,8 @@
-class DashboardController < ApplicationController
-    before_action :authenticate_user!
+class Dashboard::BenefactorController < ApplicationController
+    before_action :check_plan
 
     def index
-        @posts = Post.where(scope: "supporter")
+        @posts = Post.where(scope: "benefactor")
         @liked_posts = current_user.liked_posts
         @like = Like.new
         @total_likes = Like.all.count
@@ -15,4 +15,9 @@ class DashboardController < ApplicationController
         @post = Post.find(params[:id])
     end
 
+    private
+
+    def check_plan
+        redirect_to dashboard_index_path unless current_user.plan == "benefactor"
+    end
 end
