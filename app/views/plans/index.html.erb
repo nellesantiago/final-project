@@ -1,2 +1,128 @@
-<%= link_to "Patron Plan", plans_patron_path %>
-<%= link_to "Benefactor Plan", plans_benefactor_path %>
+<div class="plans">
+  <header>
+    <nav>
+      <div class="left">
+        <%= image_tag "logo.png", class: "logo" %>
+        <ul>
+          <li><%= link_to "Feed", dashboard_index_path %></li>
+          <li><%= link_to "Sketches", dashboard_patron_index_path %></li>
+          <li><%= link_to "Tutorials", dashboard_benefactor_index_path %></li>
+          <li class="focus"><%= link_to "Plans", plans_path %></li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <% if current_user.image.blank? %>
+              <%= image_tag "image.png" %>
+            <% else %>
+              <%= image_tag current_user.image %>
+            <% end %>
+          </button>
+          <div class="dropdown-content">
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="title">Pricing</div>
+    <div class="text">Choose a plan that works best for you.</div>
+    <div class="container">
+      <div class="box">
+        <div class="bottom free">
+          <div class="details">
+            <div class="plan">Supporter</div>
+            <div class="price">Free</div>
+            <div class="description">Free plan for all users. </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Access to all finished artworks
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Like and comment to creator's posts
+            </div>
+          </div>
+          <% if current_user.benefactor? || current_user.patron? %>
+          <% else %>
+            <div class="top">
+              Current Plan
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="box">
+        <div class="bottom patron">
+          <div class="details">
+            <div class="plan">Patron</div>
+            <div class="price">
+              ₱199<span>/month</span>
+            </div>
+            <div class="description">Ideal for individual artists. </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Access to all sketches
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Access to all finished artworks
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Like and comment to creator's posts
+            </div>
+          </div>
+          <% if current_user.benefactor? %>
+          <% elsif current_user.patron? %>
+            <div class="top">
+              Current Plan
+            </div>
+          <% else%>
+            <%= link_to "Get Patron Plan", plans_patron_path, class: "button" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="box">
+        <div class="bottom benefactor">
+          <div class="details">
+            <div class="plan">Benefactor</div>
+            <div class="price">
+              ₱499<span>/month</span>
+            </div>
+            <div class="description">Learn and improve. </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Watch art timelapse
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Access to all video tutorials
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Access to all sketches
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Access to all finished artworks
+            </div>
+            <div class="check">
+              <%= image_tag "plan-check.png" %>
+              Like and comment to creator's posts
+            </div>
+          </div>
+          <% if current_user.benefactor? %>
+            <div class="top">
+              Current Plan
+            </div>
+          <% else %>
+            <%= link_to "Get Benefactor Plan", plans_benefactor_path, class: "button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

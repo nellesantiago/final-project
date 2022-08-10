@@ -4,9 +4,10 @@
       <div class="left">
         <%= image_tag "logo.png", class: "logo" %>
         <ul>
-          <li>Feed</li>
+          <li><%= link_to "Feed", dashboard_index_path %></li>
+          <li><%= link_to "Sketches", dashboard_patron_index_path %></li>
+          <li  class="focus"><%= link_to "Tutorials", dashboard_benefactor_index_path %></li>
           <li><%= link_to "Plans", plans_path %></li>
-          <li>Liked Posts</li>
         </ul>
       </div>
       <div class="right">
@@ -28,75 +29,7 @@
   </header>
   <main>
     <div class="feed">
-      <% @posts.reverse.each do |post| %>
-        <div class="post">
-          <div class="top">
-            <div class="left">
-              <%= image_tag @creator.image %>
-              <div class="details">
-                <div class="name">
-                  <%= @creator.first_name %> <%= @creator.last_name %>
-                </div>
-                <div class="username">
-                  @<%= @creator.username %>
-                </div>
-              </div>
-              <div class="right">
-                <div class="date">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="middle">
-            <%= link_to dashboard_benefactor_path(post.id) do %>
-              <%= image_tag post.content_image %>
-            <% end %>
-          </div>
-          <div class="bottom">
-            <div class="details-wrapper">
-              <div class="buttons">
-                <div class="left-button">
-                  <div class="like">
-                    <div class="like-button">
-                      <% if post.liked?(current_user) %>
-                        <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete do %>
-                          <%= image_tag "like.png" %>
-                        <% end %>
-                      <% else %>
-                        <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: post.id %>
-                      <% end %>
-                    </div>
-                    <div class="count-like"></div>
-                  </div>
-                  <%= image_tag "comment.png" %>
-                  <%= image_tag "send.png" %>
-                </div>
-                <div class="right-button">
-                  <%= image_tag "save.png" %>
-                </div>
-              </div>
-              <div class="down">
-                <% if post.users_liked.blank? %>
-                <% else %>
-                  <div class="liked-by">
-                    Liked by <span><%= pluralize(post.users_liked.count, "fan") %></span>
-                  </div>
-                <% end %>
-              </div>
-              <div class="post-details">
-                <span><%= post.title %></span> <%= post.description %>
-              </div>
-              <div class="date">
-                <%= distance_of_time_in_words(DateTime.now, post.created_at) %> ago 
-              </div>
-            </div>
-            <%= link_to dashboard_benefactor_path(post.id), class: "comment" do %>
-              <%= image_tag current_user.image %>
-              <%= render "comments/form", comment: Comment.new, post: post%>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render "dashboard/posts", scope: @posts %>
     </div>
   </main>
 </div>
