@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: %i[index show]
 
   resources :posts do
-    resources :comments, only: %i[create]
+    resources :comments, only: %i[create destroy]
   end
 
   resources :plans, only: %i[index]
