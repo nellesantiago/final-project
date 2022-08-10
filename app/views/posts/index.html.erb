@@ -4,9 +4,11 @@
       <div class="left">
         <%= image_tag "logo.png", class: "logo" %>
         <ul>
-          <li>Home</li>
-          <li>Fans</li>
-          <li>Transactions</li>
+          <li class="focus"><%= link_to "Feed", dashboard_index_path %></li>
+          <li><%= link_to "Plans", plans_path %></li>
+          <li><%= link_to "Sketches", dashboard_patron_index_path %></li>
+          <li><%= link_to "Tutorials", dashboard_benefactor_index_path %></li>
+          <li>Liked Posts</li>
         </ul>
       </div>
       <div class="right">

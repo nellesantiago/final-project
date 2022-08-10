@@ -18,6 +18,6 @@ class Dashboard::PatronController < ApplicationController
     private
 
     def check_plan
-        redirect_to dashboard_index_path unless current_user.plan == "patron" || current_user.plan == "benefactor"
+        redirect_to dashboard_index_path unless current_user.patron? || current_user.benefactor?
     end
 end
