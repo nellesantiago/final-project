@@ -2,7 +2,9 @@ class DashboardController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @posts = Post.where(scope: "supporter")
+        @supporter_posts = Post.where(scope: "supporter")
+        @patron_posts = Post.where.not(scope: "benefactor")
+        @posts = Post.all
         @liked_posts = current_user.liked_posts
         @like = Like.new
         @total_likes = Like.all.count
@@ -13,6 +15,8 @@ class DashboardController < ApplicationController
 
     def show
         @post = Post.find(params[:id])
+        @like = Like.new
+        @creator = User.find_by(role: "admin")
     end
 
 end
