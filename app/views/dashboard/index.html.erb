@@ -5,16 +5,18 @@
         <%= image_tag "logo.png", class: "logo" %>
         <ul>
           <li class="focus"><%= link_to "Feed", dashboard_index_path %></li>
-          <li><%= link_to "Sketches", dashboard_patron_index_path %></li>
-          <li><%= link_to "Tutorials", dashboard_benefactor_index_path %></li>
+          <li><%= link_to "Sketches", dashboard_sketches_path %></li>
+          <li><%= link_to "Tutorials", dashboard_tutorials_path %></li>
           <li><%= link_to "Plans", plans_path %></li>
         </ul>
       </div>
       <div class="right">
         <div class="dropdown">
           <button class="dropbtn">
-            <% if current_user.image.blank? %>
+            <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
               <%= image_tag "image.png" %>
+            <% elsif current_user.avatar_image.attached?  %>
+              <%= image_tag current_user.avatar_image %>
             <% else %>
               <%= image_tag current_user.image %>
             <% end %>
@@ -30,11 +32,11 @@
   <main>
     <div class="feed">
       <% if current_user.supporter? %>
-      <%= render "dashboard/posts", scope: @supporter_posts %>
+        <%= render "dashboard/posts", scope: @supporter_posts %>
       <% elsif current_user.patron? %>
-      <%= render "dashboard/posts", scope: @patron_posts %>
+        <%= render "dashboard/posts", scope: @patron_posts %>
       <% else %>
-      <%= render "dashboard/posts", scope: @posts %>
+        <%= render "dashboard/posts", scope: @posts %>
       <% end %>
     </div>
   </main>
