@@ -1,0 +1,67 @@
+.form-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .payment-form {
+        width: 500px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+        border-radius: 20px;
+        padding: 50px;
+
+        .payment-title {
+            font-size: 24px;
+        }
+    
+        .field {
+            width: 100%;
+            margin-top: 20px;
+            label {
+                width: 100%;
+            }
+            
+            input {
+                margin-top: 10px;
+                width: 100%;
+                border: none;
+                background-color: transparent;
+                border-bottom: 1px black solid;
+                padding: 10px 5px;
+                outline: none;
+            }
+        }
+
+        .card-details {
+            display: flex;
+            .field:first-child {
+                margin-left: 0;
+            }
+            .field:last-child {
+                margin-right: 0;
+            }
+            .field {
+                width: calc(100% / 3);
+                margin: 20px 10px;
+            }
+        }
+
+        .actions {
+            input {
+                padding-top: 10px;
+                outline: none;
+                border: none;
+                font-weight: 600;
+                font-size: 16px;
+                color: #c66017;
+            }
+        }
+    }
+}
