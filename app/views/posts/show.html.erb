@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="container">
       <div class="nav">
-        <%= link_to dashboard_index_path do %>
+        <%= link_to :back do %>
           <%= image_tag "show-back.png" %>
         <% end %>
         <%= image_tag "logo.png" %>
@@ -10,9 +10,9 @@
       <main>
         <div class="left">
           <% if @post.content_image.content_type.include?("image") %>
-          <%= image_tag url_for(@post.content_image) %>
+            <%= image_tag url_for(@post.content_image) %>
           <% else %>
-          <%= video_tag url_for(@post.content_image), controls: true, height: "550px", width: "550px" %>
+            <%= video_tag url_for(@post.content_image), controls: true, height: "550px", width: "550px" %>
           <% end %>
           <div class="details">
             <span class="title">
@@ -37,44 +37,34 @@
             </div>
           </div>
           <div class="comments">
-          <% if @post.comments.blank? %>
-          <div class="blank">No comments</div>
-          <% else %>
-            <% @post.comments.each do |comment| %>
-              <div class="comment">
-                <%= image_tag comment.user.image %>
-                <div class="text">
-                  <div class="username">
-                    @<%= comment.user.username%> <div class="date">
-                  <%= comment.created_at.strftime("%D") %>
-                </div>
+            <% if @post.comments.blank? %>
+              <div class="blank">No comments</div>
+            <% else %>
+              <% @post.comments.each do |comment| %>
+                <div class="comment">
+                  <%= image_tag comment.user.image %>
+                  <div class="text">
+                    <div class="username">
+                      @<%= comment.user.username%>
+                      <div class="date">
+                        <%= comment.created_at.strftime("%D") %>
+                      </div>
+                    </div>
+                    <div class="message">
+                      <%= comment.message %>
+                    </div>
                   </div>
-                  <div class="message">
-                    <%= comment.message %>
-                  </div>
-                    
+                  <% if comment.user == current_user || current_user.admin? %>
+                    <%= link_to post_comment_path(@post.id, comment.id), method: :delete do %>
+                      <%= image_tag "trash.png", class: "trash" %>
+                    <% end %>
+                  <% end %>
                 </div>
-                <% if comment.user == current_user || current_user.admin? %>
-                <%= link_to post_comment_path(@post.id, comment.id), method: :delete do %>
-                <%= image_tag "trash.png", class: "trash" %>
-                <% end %>
-                <% end %>
-               
-               
-              </div>
-            <% end %>
+              <% end %>
             <% end %>
           </div>
           <div class="like">
-            <div class="like-button">
-              <% if @post.liked?(current_user) %>
-                <%= link_to @post.likes.find_by(user_id: current_user.id), method: :delete do %>
-                  <%= image_tag "like.png" %>
-                <% end %>
-              <% else %>
-                <%= render 'layouts/like', like: @like, user_id: current_user.id, post_id: @post.id %>
-              <% end %>
-            </div>
+            <%= image_tag "unlike.png" %>
             <%= image_tag "comment.png" %>
             <%= image_tag "send.png" %>
           </div>

@@ -24,7 +24,15 @@
           list-style-type: none;
           display: inline-flex;
           margin-left: 30px;
-          font-weight: 500;
+          
+          a {
+            text-decoration: none;
+          color: black;
+          }
+        }
+
+        .focus {
+          font-weight: 600;
         }
 
         img {
