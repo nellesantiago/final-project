@@ -13,7 +13,7 @@
       <div class="buttons">
         <input type="text" placeholder="Find a creator" class="search">
         <%= link_to "Log in", new_user_session_path, class: "login-button" %>
-        <%= link_to "Create on Likha", new_user_registration_path, class: "create"%>
+        <%= link_to "Be a supporter", new_user_registration_path, class: "create"%>
       </div>
     </nav>
   </header>
@@ -44,3 +44,24 @@
     </div>
   </main>
 </div>
+<% if alert.present? %>
+<div class="alert">
+  <div class="container">
+    <div class="message">
+      <%= image_tag "alert.png" %>
+      <%= alert %>
+    </div>
+    <%= link_to "Close", root_path %>
+  </div>
+</div>
+<% elsif notice.present? %>
+<div class="notice">
+  <div class="container">
+    <div class="message">
+      <%= image_tag "notice.png" %>
+      <%= notice %>
+    </div>
+    <%= link_to "Close", root_path %>
+  </div>
+</div>
+<% end %>
