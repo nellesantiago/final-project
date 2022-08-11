@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="container">
       <div class="nav">
-        <%= link_to :back do %>
+        <%= link_to dashboard_index_path do %>
           <%= image_tag "show-back.png" %>
         <% end %>
         <%= image_tag "logo.png" %>
@@ -45,7 +45,7 @@
                   <%= image_tag comment.user.image %>
                   <div class="text">
                     <div class="username">
-                      @<%= comment.user.username%> 
+                      @<%= comment.user.username%>
                       <div class="date">
                         <%= comment.created_at.strftime("%D") %>
                       </div>
@@ -81,7 +81,13 @@
             <div class="count-like">Liked by <span><%= pluralize(@post.users_liked.count, "fan") %></span></div>
           <% end %>
           <div class="add-comment">
-            <%= image_tag current_user.image %>
+            <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
+              <%= image_tag "image.png" %>
+            <% elsif current_user.avatar_image.attached?  %>
+              <%= image_tag current_user.avatar_image %>
+            <% else %>
+              <%= image_tag current_user.image %>
+            <% end %>
             <%= render "comments/form", comment: Comment.new, post: @post, autofocus: true %>
           </div>
         </div>
