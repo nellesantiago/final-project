@@ -15,3 +15,54 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.alert, .notice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .container {
+        background-color: white;
+        height: 170px;
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 20px 5px 20px;
+        border-radius: 20px;
+        flex-direction: column;
+        .message {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        a {
+            margin-top: 40px;
+            font-size: 14px;
+            color: grey;
+
+            &:hover {
+                color: black;
+            }
+
+        }
+    }
+}
+
+#error_explanation, #alert {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: rgb(215, 39, 39);
+}
