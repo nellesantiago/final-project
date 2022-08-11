@@ -1,0 +1,6 @@
+<% @payments.each do |payment| %>
+    <span><%= payment["attributes"]["billing"]["email"] %></span> <br>
+    <span><%= payment["attributes"]["description"].to_s.split.first %></span> </t>
+    <span>as of <%= Time.at(payment["attributes"]["paid_at"]).to_datetime.strftime('%B %e, %Y') %></span> <br>
+
+<% end %>

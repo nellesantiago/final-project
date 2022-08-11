@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :home, only: %i[index]
   
   namespace :dashboard do
-    resources :patron, only: %i[index show]
-    resources :benefactor, only: %i[index show]
+    resources :sketches, only: %i[index show]
+    resources :tutorials, only: %i[index show]
   end
   
   resources :dashboard, only: %i[index show]
@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: %i[create destroy]
   end
+
+  resources :subscribers, only: %i[index]
 
   resources :plans, only: %i[index]
 
