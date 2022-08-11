@@ -1,0 +1,37 @@
+<div class="dashboard">
+  <header>
+    <nav>
+      <div class="left">
+        <%= image_tag "logo.png", class: "logo" %>
+        <ul>
+          <li><%= link_to "Feed", dashboard_index_path %></li>
+          <li class="focus"><%= link_to "Sketches", dashboard_sketches_path %></li>
+          <li><%= link_to "Tutorials", dashboard_tutorials_path %></li>
+          <li><%= link_to "Plans", plans_path %></li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
+              <%= image_tag "image.png" %>
+            <% elsif current_user.avatar_image.attached?  %>
+              <%= image_tag current_user.avatar_image %>
+            <% else %>
+              <%= image_tag current_user.image %>
+            <% end %>
+          </button>
+          <div class="dropdown-content">
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="feed">
+      <%= render "dashboard/sketches_posts" %>
+    </div>
+  </main>
+</div>
