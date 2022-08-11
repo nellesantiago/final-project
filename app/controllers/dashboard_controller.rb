@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
     before_action :authenticate_user!
+    before_action :confirm_role
 
     def index
         @supporter_posts = Post.where(scope: "supporter")
@@ -17,6 +18,12 @@ class DashboardController < ApplicationController
         @post = Post.find(params[:id])
         @like = Like.new
         @creator = User.find_by(role: "admin")
+    end 
+
+    private
+
+    def confirm_role
+        redirect_to posts_path if current_user.admin?
     end
 
 end

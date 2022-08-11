@@ -5,10 +5,8 @@
         <%= image_tag "logo.png", class: "logo" %>
         <ul>
           <li class="focus"><%= link_to "Feed", dashboard_index_path %></li>
-          <li><%= link_to "Plans", plans_path %></li>
-          <li><%= link_to "Sketches", dashboard_patron_index_path %></li>
-          <li><%= link_to "Tutorials", dashboard_benefactor_index_path %></li>
-          <li>Liked Posts</li>
+          <li><%= link_to "Fans", users_path %></li>
+          <li><%= link_to "Subscribers", subscribers_path %></li>
         </ul>
       </div>
       <div class="right">
@@ -62,13 +60,17 @@
     <div class="container">
       <div class="feed">
         <div class="title">
-          <div class="name">Artworks</div>
+          <div class="name">Posts</div>
           <%= link_to "+ New", new_post_path %>
         </div>
         <div class="posts">
           <% @posts.reverse.each do |post| %>
             <%= link_to post, class: "post" do %>
-              <%= image_tag post.content_image %>
+              <% if post.content_image.content_type.include?("image")%>
+                <%= image_tag url_for(post.content_image) %>
+              <% else %>
+                <%= video_tag url_for(post.content_image), controls: true, height: "320px", width: "320px"%>
+              <% end %>
               <div class="like-comment">
                 <div class="like">
                   <%= image_tag "unlike.png" %>
