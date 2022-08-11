@@ -13,21 +13,37 @@ module Paymongo
     
             def create_payment_method(info)
                 response = send_request(:post, 'payment_methods', method_params(info))
-                {id: response['data']['id']}
+                if response["errors"]
+                    return response
+                else
+                    return {id: response['data']['id']}
+                end
             end
     
             def proceed(info)
                 intent = self.create_payment_intent(info)
+
                 method = self.create_payment_method(info)
+                return method if method.has_key?("errors")
+
                 response = send_request(:post, "payment_intents/#{intent[:id]}/attach", attach_params(method[:id], intent[:client_key]))
-                response['data']['attributes']['status']
+                if response["errors"]
+                    return response
+                else
+                    return response['data']['attributes']['status']
+                end
+            end
+
+            def get_payments
+                response = send_request(:get, 'payments')
+                response['data']
             end
     
             private
         
             def send_request(http_method, endpoint, params = {})
                 @response = connection.public_send(http_method, endpoint, params)
-                JSON.parse(@response.body)
+                return JSON.parse(@response.body)
             end
         
             def connection
