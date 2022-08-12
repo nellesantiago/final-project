@@ -21,7 +21,7 @@ class Dashboard::TutorialsController < ApplicationController
     private
 
     def check_plan
-        redirect_to dashboard_index_path unless current_user.plan == "benefactor"
+        redirect_to dashboard_index_path, alert: "Upgrade your plan to access this content" unless current_user.plan == "benefactor"
     end
 
     def confirm_role

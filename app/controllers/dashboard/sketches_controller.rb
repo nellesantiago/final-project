@@ -21,7 +21,7 @@ class Dashboard::SketchesController < ApplicationController
     private
 
     def check_plan
-        redirect_to dashboard_index_path unless current_user.patron? || current_user.benefactor?
+        redirect_to dashboard_index_path, alert: "Upgrade your plant to access this content" unless current_user.patron? || current_user.benefactor?
     end
 
     def confirm_role

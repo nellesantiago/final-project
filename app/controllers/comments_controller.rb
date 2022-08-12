@@ -2,8 +2,11 @@ class CommentsController < ApplicationController
 
     def create
         @comment = Comment.new(comment_params)
-        @comment.save
+        if @comment.save
         redirect_to request.referer
+        else
+        redirect_to request.referer, alert: "Message can't be blank"
+        end
     end
 
     def destroy
