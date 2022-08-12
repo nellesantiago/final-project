@@ -61,34 +61,32 @@
       <div class="feed">
         <div class="title">
           <div class="name">Posts</div>
-          <%= link_to "+ New", new_post_path %>
+          <%= link_to "+ New", new_post_path, class: "new-post-button" %>
         </div>
         <% if @posts.blank? %>
-        <div class="blank">No posts</div>
+          <div class="blank">No posts</div>
         <% else %>
-        <div class="posts">
-          <% @posts.reverse.each do |post| %>
-            <%= link_to post, class: "post" do %>
-            <% if post.content_image.attached? %>
-              <% if post.content_image.content_type.include?("image")%>
-                <%= image_tag url_for(post.content_image) %>
-              <% else %>
-                <%= video_tag url_for(post.content_image), controls: true, height: "320px", width: "320px"%>
-              <% end %>
-              <% end %>
-              <div class="like-comment">
-                <div class="like">
-                  <%= image_tag "unlike.png" %>
-                  <%= post.users_liked.count %>
+          <div class="posts">
+            <% @posts.reverse.each do |post| %>
+              <%= link_to post, class: "post" do %>
+                <% if post.content_image.content_type.include?("image")%>
+                  <%= image_tag url_for(post.content_image) %>
+                <% else %>
+                  <%= video_tag url_for(post.content_image), controls: true, height: "320px", width: "320px"%>
+                <% end %>
+                <div class="like-comment">
+                  <div class="like">
+                    <%= image_tag "unlike.png" %>
+                    <%= post.users_liked.count %>
+                  </div>
+                  <div class="comment">
+                    <%= image_tag "comment.png" %>
+                    <%= post.comments.count %>
+                  </div>
                 </div>
-                <div class="comment">
-                  <%= image_tag "comment.png" %>
-                  <%= post.comments.count %>
-                </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
         <% end %>
       </div>
     </div>

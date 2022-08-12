@@ -27,20 +27,75 @@ RSpec.describe "Admin", type: :system do
     expect(page).to have_text("Transactions")
   end
 
-  it "allows admin to delete a post" do
+  it "allows admin to create a post" do
     visit posts_path
 
     expect(page).to have_text("Posts")
 
-    first(".post").click
+    first(".new-post-button").click
 
-    expect(page).to have_text("Sample")
+    expect(page).to have_text("New Post")
 
-    first(".delete-post-button").click
+    fill_in "Title", with: "New Post"
+    fill_in "Description", with: "Post Description"
+    attach_file "post[content_image]", file_fixture("image.png")
 
-    expect(page).to have_text("Posts")
+    click_on "Create Post"
+
+    expect(page).to have_text("New Post")
   end
 
+  it "prevents admin to create a post without a post attachment" do
+    visit posts_path
+
+    expect(page).to have_text("Posts")
+
+    first(".new-post-button").click
+
+    expect(page).to have_text("New Post")
+
+    fill_in "Title", with: "New Post"
+    fill_in "Description", with: "Post Description"
+
+    click_on "Create Post"
+
+    expect(page).to have_text("Content image can't be blank")
+  end
+  
+  it "allows admin to edit a post" do
+    visit posts_path
+    
+    expect(page).to have_text("Posts")
+    
+    first(".post").click
+    
+    expect(page).to have_text("Sample")
+    
+    first(".edit-post-button").click
+    
+    expect(page).to have_text("Edit Post")
+    
+    fill_in "Title", with: "Updated Title"
+    
+    click_on "Update Post"
+    
+    expect(page).to have_text("Updated Title")
+  end
+  
+    it "allows admin to delete a post" do
+      visit posts_path
+  
+      expect(page).to have_text("Posts")
+  
+      first(".post").click
+  
+      expect(page).to have_text("Sample")
+  
+      first(".delete-post-button").click
+  
+      expect(page).to have_text("Posts")
+    end
+  
   it "allows admin to delete a comment from a post" do
     visit posts_path
 

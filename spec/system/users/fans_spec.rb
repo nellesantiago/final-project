@@ -36,21 +36,18 @@ RSpec.describe "Fans", type: :system do
   it "allows fan to like a post" do
     visit dashboard_index_path
 
-    expect(page).to have_text("Title")
+    expect(page).to have_text("Sample")
 
-    first('.like-post-button').click
-    
-    expect(page).to have_text("Liked")
+    expect{first('.like-post-button').click}.to change{Like.count}.by(1)
+
  end
 
   it "allows fan to unlike a post" do
     visit dashboard_index_path
     
     expect(page).to have_text("Liked")
-    
-    first('.unlike-post-button').click
-
-    expect(page).not_to have_text("Liked")
+  
+    expect{first('.unlike-post-button').click}.to change{Like.count}.by(-1)
   end
 
   it "allows fan to add a comment to a post" do
@@ -62,9 +59,17 @@ RSpec.describe "Fans", type: :system do
 
     fill_in "Add a comment...", with: "New Comment"
 
-    click_on "Post"
+    expect{click_on "Post"}.to change{Comment.count}.by(1)
+  end
 
-    expect(page).to have_text("New Comment")
+  it "prevents fan to add a comment to a post without a message" do
+    visit dashboard_index_path
+
+    first('.comment').click
+
+    expect(page).to have_text("Sample")
+
+    expect{click_on "Post"}.to change{Comment.count}.by(0)
   end
 
   it "allows a fan to delete a comment from a post" do
@@ -74,9 +79,7 @@ RSpec.describe "Fans", type: :system do
 
     expect(page).to have_text("comment")
 
-    first('.delete-comment-button').click
-
-    expect(page).to have_text("No comments")
+    expect{first('.delete-comment-button').click}.to change{Comment.count}.by(-1)
   end
   
 end
