@@ -69,7 +69,7 @@ RSpec.describe "Admin", type: :system do
     
     first(".post").click
     
-    expect(page).to have_text("Sample")
+    expect(page).to have_text("Example")
     
     first(".edit-post-button").click
     
@@ -89,7 +89,7 @@ RSpec.describe "Admin", type: :system do
   
       first(".post").click
   
-      expect(page).to have_text("Sample")
+      expect(page).to have_text("Example")
   
       first(".delete-post-button").click
   
@@ -103,7 +103,7 @@ RSpec.describe "Admin", type: :system do
 
     first(".post").click
 
-    expect(page).to have_text("Sample")
+    expect(page).to have_text("Example")
 
     first(".delete-comment-button").click
 
