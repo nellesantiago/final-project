@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
             current_user.plan = payment_info_params[:plan]
             current_user.plan_expiration = Date.current.months_since(1)
             current_user.save
-            redirect_to dashboard_index_path, alert: "Payment successful! You are now a #{current_user.plan}"
+            redirect_to dashboard_index_path, notice: "Payment successful! You are now a #{current_user.plan}"
         elsif response.has_key?("errors") && fraud?(response["errors"].first["detail"])
             redirect_to request.referer, alert: "Something went wrong, please try again later"
         else

@@ -7,12 +7,11 @@
     justify-content: center;
 
     .payment-form {
-        width: 500px;
-        height: 500px;
+        width: 800px;
+        height: 700px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
         border-radius: 20px;
         padding: 50px;
@@ -21,13 +20,16 @@
             width: 100%;
             display: flex;
             align-items: center;
+            margin-bottom: 20px;
             img {
-                width: 25px;
-                margin-right: 10px;
+                width: 20px;
+                margin-right: 15px;
+                margin-top: 5px;
             }
     
             .payment-title {
                 font-size: 24px;
+                font-weight: 600;
             }
         }
 
@@ -37,16 +39,20 @@
             margin-top: 20px;
             label {
                 width: 100%;
+                padding-left: 5px;
             }
             
             input {
                 margin-top: 10px;
                 width: 100%;
                 border: none;
-                background-color: transparent;
-                border-bottom: 1px black solid;
-                padding: 10px 5px;
+                padding: 10px 20px;
                 outline: none;
+                background-color: white;
+                height: 50px;
+                border-radius: 10px;
+                margin-bottom: 15px;
+                font-size: 16px;
             }
         }
 
@@ -65,14 +71,29 @@
         }
 
         .actions {
+            margin-top: 20px;
             input {
-                padding-top: 10px;
                 outline: none;
                 border: none;
                 font-weight: 600;
                 font-size: 16px;
                 color: #c66017;
+                border: 1px solid #c66017;
+                border-radius: 10px;
+                padding: 15px 20px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #c66017;
+                    border: 1px solid #c66017;
+                    color: white;
+                }
             }
         }
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
     }
 }
