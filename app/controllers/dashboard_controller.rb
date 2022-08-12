@@ -28,7 +28,7 @@ class DashboardController < ApplicationController
     end
 
     def check_expiry
-        if !current_user.plan_expiration.future?
+        if !current_user.plan_expiration.nil? && !current_user.plan_expiration.future?
             flash[:alert] = "Your #{current_user.plan} plan has expired"
             current_user.update(plan: "supporter", plan_expiration: nil)
         end
