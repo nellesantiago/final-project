@@ -1,6 +1,11 @@
 <div class="form-wrap">
   <%= form_with model: PaymentInfo.new, url: payments_card_path, method: :post, class: "payment-form" do |form| %>
-    <label class="payment-title">Credit Card</label>
+    <div class="header">
+      <%= link_to plans_path do %>
+        <%= image_tag "back.png" %>
+      <% end %>
+      <label class="payment-title">Credit Card Payment</label>
+    </div>
     <div class="field">
       <%= form.label :name %>
       <%= form.text_field :name %>

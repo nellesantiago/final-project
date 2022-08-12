@@ -41,3 +41,14 @@
     </div>
   </main>
 </div>
+<% if alert.present? %>
+<div class="alert">
+  <div class="container">
+    <div class="message">
+      <%= image_tag "alert.png" %>
+      <%= alert %>
+    </div>
+    <%= link_to "Close", dashboard_index_path %>
+  </div>
+</div>
+<% end %>
