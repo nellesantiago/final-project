@@ -1,36 +1,36 @@
 <%= form_with(model: post) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <% post.errors.each do |error| %>
+        <div><%= error.full_message %></div>
+      <% end %>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
-
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
-
-   <div class="field">
+  <div class="field">
     <%= form.label :content_image %>
-    <%= form.file_field :content_image %>
+    <div class="image">
+      <% if post.content_image.attached? %>
+        <% if post.content_image.content_type.include?("image")%>
+          <%= image_tag url_for(post.content_image) %>
+        <% else %>
+          <%= video_tag url_for(post.content_image), autoplay: true, height: "50px", width: "100px", muted: true, loop: true%>
+        <% end %>
+      <% end %>
+      <%= form.file_field :content_image %>
+    </div>
   </div>
-
   <div class="field">
     <%= form.label :scope %>
     <%= form.select :scope, options_for_select(["supporter", "patron", "benefactor"]) %>
   </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>

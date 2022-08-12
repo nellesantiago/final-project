@@ -19,10 +19,12 @@
     </div>
     <div class="middle">
       <%= link_to dashboard_sketch_path(post.id) do %>
-        <% if post.content_image.content_type.include?("image")%>
-          <%= image_tag url_for(post.content_image) %>
-        <% else %>
-          <%= video_tag url_for(post.content_image), controls: true, height: "500px", width: "500px"%>
+        <% if post.content_image.attached? %>
+          <% if post.content_image.content_type.include?("image")%>
+            <%= image_tag url_for(post.content_image) %>
+          <% else %>
+            <%= video_tag url_for(post.content_image), controls: true, height: "500px", width: "500px"%>
+          <% end %>
         <% end %>
       <% end %>
     </div>
