@@ -2,21 +2,21 @@
   <%= form_with model: PaymentInfo.new, url: payments_card_path, method: :post, class: "payment-form" do |form| %>
     <div class="header">
       <%= link_to plans_path do %>
-        <%= image_tag "back.png" %>
+        <%= image_tag "show-back.png" %>
       <% end %>
       <label class="payment-title">Credit Card Payment</label>
     </div>
     <div class="field">
-      <%= form.label :name %>
+      <%= form.label :name, "Name on card" %>
       <%= form.text_field :name %>
     </div>
     <div class="field">
       <%= form.label :email %>
-      <%= form.text_field :email %>
+      <%= form.text_field :email, placeholder: "email@example.com" %>
     </div>
     <div class="field">
       <%= form.label :card_number %>
-      <%= form.text_field :card_number %>
+      <%= form.text_field :card_number, placeholder: "●●●● ●●●● ●●●● ●●●●" %>
     </div>
     <div class="card-details">
       <div class="field">
@@ -28,7 +28,7 @@
         <%= form.number_field :exp_year %>
       </div>
       <div class="field">
-        <%= form.label :cvc %>
+        <%= form.label :cvc, "CVC" %>
         <%= form.text_field :cvc %>
       </div>
     </div>
