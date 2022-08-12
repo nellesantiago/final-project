@@ -9,10 +9,12 @@
       </div>
       <main>
         <div class="left">
+          <% if @post.content_image.attached? %>
           <% if @post.content_image.content_type.include?("image") %>
             <%= image_tag url_for(@post.content_image) %>
           <% else %>
             <%= video_tag url_for(@post.content_image), controls: true, height: "550px", width: "550px" %>
+          <% end %>
           <% end %>
           <div class="details">
             <span class="title">
@@ -61,7 +63,7 @@
                     </div>
                   </div>
                   <% if comment.user == current_user || current_user.admin? %>
-                    <%= link_to post_comment_path(@post.id, comment.id), method: :delete do %>
+                    <%= link_to post_comment_path(@post.id, comment.id), method: :delete, class: "delete-comment-button" do %>
                       <%= image_tag "trash.png", class: "trash" %>
                     <% end %>
                   <% end %>

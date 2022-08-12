@@ -19,10 +19,12 @@
     </div>
     <div class="middle">
       <%= link_to dashboard_path(post.id) do %>
+            <% if post.content_image.attached? %>
         <% if post.content_image.content_type.include?("image")%>
           <%= image_tag url_for(post.content_image) %>
         <% else %>
           <%= video_tag url_for(post.content_image), controls: true, height: "500px", width: "500px"%>
+        <% end %>
         <% end %>
       <% end %>
     </div>
@@ -33,7 +35,7 @@
             <div class="like">
               <div class="like-button">
                 <% if post.liked?(current_user) %>
-                  <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete do %>
+                  <%= link_to post.likes.find_by(user_id: current_user.id), method: :delete, class: "unlike-post-button" do %>
                     <%= image_tag "like.png" %>
                   <% end %>
                 <% else %>

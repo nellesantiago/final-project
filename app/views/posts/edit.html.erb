@@ -1,6 +1,8 @@
-<h1>Editing Post</h1>
-
-<%= render 'form', post: @post %>
-
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+<div class="add-post">
+  <div class="container">
+    <div class="title"><%= link_to :back do %>
+        <%= image_tag "show-back.png" %>
+      <% end %>Edit Post</div>
+    <%= render 'form', post: @post %>
+  </div>
+</div>

@@ -63,13 +63,18 @@
           <div class="name">Posts</div>
           <%= link_to "+ New", new_post_path %>
         </div>
+        <% if @posts.blank? %>
+        <div class="blank">No posts</div>
+        <% else %>
         <div class="posts">
           <% @posts.reverse.each do |post| %>
             <%= link_to post, class: "post" do %>
+            <% if post.content_image.attached? %>
               <% if post.content_image.content_type.include?("image")%>
                 <%= image_tag url_for(post.content_image) %>
               <% else %>
                 <%= video_tag url_for(post.content_image), controls: true, height: "320px", width: "320px"%>
+              <% end %>
               <% end %>
               <div class="like-comment">
                 <div class="like">
@@ -84,6 +89,7 @@
             <% end %>
           <% end %>
         </div>
+        <% end %>
       </div>
     </div>
   </main>
