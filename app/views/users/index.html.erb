@@ -1,4 +1,57 @@
-<h1>Users</h1>
-<% @users.each do |user| %>
-  <h1><%= user.email %></h1>
-<% end %>
+<div class="fans">
+  <header>
+    <nav>
+      <div class="left">
+        <%= image_tag "logo.png", class: "logo" %>
+        <ul>
+          <li><%= link_to "Home", posts_path %></li>
+          <li class="focus"><%= link_to "Fans", users_path %></li>
+          <li><%= link_to "Transactions", subscribers_path %></li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
+              <%= image_tag "image.png" %>
+            <% elsif current_user.avatar_image.attached?  %>
+              <%= image_tag current_user.avatar_image %>
+            <% else %>
+              <%= image_tag current_user.image %>
+            <% end %>
+          </button>
+          <div class="dropdown-content">
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="title">
+      <%= @users.count %> Fans
+    </div>
+    <div class="container">
+      <% @users.each do |user| %>
+        <div class="fan">
+          <% if user.avatar_image.attached? %>
+            <%= image_tag user.avatar_image %>
+          <% elsif user.provider.nil? %>
+            <%= image_tag "image.png" %>
+            <% else %>
+            <%= image_tag user.image %>
+          <% end %>
+          <div class="details">
+            <div class="name">
+              <%= user.first_name %> <%= user.last_name %>
+            </div>
+            <div class="username">
+              @<%= user.username %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </main>
+</div>

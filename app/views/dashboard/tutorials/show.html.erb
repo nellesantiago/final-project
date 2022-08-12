@@ -38,12 +38,12 @@
             <% else %>
               <% @post.comments.each do |comment| %>
                 <div class="comment">
-                  <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
+                   <% if comment.user.image.blank? && !comment.user.avatar_image.attached? %>
                     <%= image_tag "image.png" %>
-                  <% elsif current_user.avatar_image.attached?  %>
-                    <%= image_tag current_user.avatar_image %>
+                  <% elsif comment.user.avatar_image.attached?  %>
+                    <%= image_tag comment.user.avatar_image %>
                   <% else %>
-                    <%= image_tag current_user.image %>
+                    <%= image_tag comment.user.image %>
                   <% end %>
                   <div class="text">
                     <div class="username">
