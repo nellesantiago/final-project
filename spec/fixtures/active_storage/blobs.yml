@@ -1,0 +1,19 @@
+post3_file_blob:
+  id: 1
+  key: t1r05uz3uzbr7at3uz5v3m8t8yfq
+  filename: image.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true, "analyzed":true}'
+  byte_size: 0
+  checksum: 1B2M2Y8AsgTpgAmY7PhCfg==
+  service_name: local
+
+post2_file_blob:
+  id: 2
+  key: 5gbeo3kcujuhjkxmoxqup8gziguj
+  filename: picture.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true, "analyzed":true}'
+  byte_size: 0
+  checksum: 1B2M2Y8AsgTpgAmY7PhCfg==
+  service_name: local

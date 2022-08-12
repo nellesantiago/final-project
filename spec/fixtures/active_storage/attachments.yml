@@ -1,0 +1,11 @@
+post3_file:
+  name: content_image
+  record_type: Post
+  record_id: 3
+  blob_id: 1
+
+post2_file:
+  name: content_image
+  record_type: Post
+  record_id: 2
+  blob_id: 2

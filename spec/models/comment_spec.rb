@@ -5,11 +5,15 @@ RSpec.describe Comment, type: :model do
   subject {
     Comment.new(
     message: "Comment",
-    post_id: posts(:post1).id,
+    post_id: posts(:post2).id,
     user_id: users(:fan).id,
   )
 }
   
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
+  end
+
   it "is not valid without a message" do
     subject.message = nil
     expect(subject).to_not be_valid

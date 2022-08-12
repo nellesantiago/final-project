@@ -1,9 +1,3 @@
-post1:
-  id: 1
-  title: "Title"
-  description: "Description"
-  scope: "supporter"
-
 post2:
   id: 2
   title: "Example"

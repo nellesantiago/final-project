@@ -9,12 +9,10 @@
       </div>
       <main>
         <div class="left">
-          <% if @post.content_image.attached? %>
           <% if @post.content_image.content_type.include?("image") %>
             <%= image_tag url_for(@post.content_image) %>
           <% else %>
             <%= video_tag url_for(@post.content_image), controls: true, height: "550px", width: "550px" %>
-          <% end %>
           <% end %>
           <div class="details">
             <span class="title">
@@ -44,7 +42,7 @@
             <% else %>
               <% @post.comments.each do |comment| %>
                 <div class="comment">
-                   <% if comment.user.image.blank? && !comment.user.avatar_image.attached? %>
+                  <% if comment.user.image.blank? && !comment.user.avatar_image.attached? %>
                     <%= image_tag "image.png" %>
                   <% elsif comment.user.avatar_image.attached?  %>
                     <%= image_tag comment.user.avatar_image %>

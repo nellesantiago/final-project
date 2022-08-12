@@ -2,28 +2,26 @@
   <div class="overlay">
     <div class="container">
       <div class="nav">
-      <div>
-        <%= link_to posts_path do %>
-          <%= image_tag "show-back.png" %>
-        <% end %>
+        <div>
+          <%= link_to posts_path do %>
+            <%= image_tag "show-back.png" %>
+          <% end %>
         </div>
         <div>
-        <%= link_to edit_post_path(@post) do %>
-          <%= image_tag "edit-post.png" %>
-        <% end %>
-        <%= link_to post_path(@post), method: :delete, class: "delete-post-button" do %>
-        <%= image_tag "black-trash.png" %>
-        <% end %>
+          <%= link_to edit_post_path(@post), class: "edit-post-button" do %>
+            <%= image_tag "edit-post.png" %>
+          <% end %>
+          <%= link_to post_path(@post), method: :delete, class: "delete-post-button" do %>
+            <%= image_tag "black-trash.png" %>
+          <% end %>
         </div>
       </div>
       <main>
         <div class="left">
-        <% if @post.content_image.attached? %>
           <% if @post.content_image.content_type.include?("image") %>
             <%= image_tag url_for(@post.content_image) %>
           <% else %>
             <%= video_tag url_for(@post.content_image), controls: true, height: "550px", width: "550px" %>
-          <% end %>
           <% end %>
           <div class="details">
             <span class="title">
