@@ -22,19 +22,13 @@
         </div>
         <div class="right">
           <div class="creator">
-            <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
-              <%= image_tag "image.png" %>
-            <% elsif current_user.avatar_image.attached?  %>
-              <%= image_tag current_user.avatar_image %>
-            <% else %>
-              <%= image_tag current_user.image %>
-            <% end %>
+            <%= image_tag @creator.avatar_image.attached? ? @creator.avatar_image : "profile.jpg" %>
             <div class="info">
               <div class="name">
-                <%= current_user.first_name %> <%= current_user.last_name %>
+                <%= @creator.first_name %> <%= @creator.last_name %>
               </div>
               <div class="username">
-                @<%= current_user.username %>
+                @<%= @creator.username %>
               </div>
             </div>
           </div>

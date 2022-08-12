@@ -26,7 +26,7 @@
         </div>
         <div class="right">
           <div class="creator">
-            <%= image_tag @creator.image %>
+            <%= image_tag @creator.avatar_image.attached? ? @creator.avatar_image : "profile.jpg" %>
             <div class="info">
               <div class="name">
                 <%= @creator.first_name %> <%= @creator.last_name %>
