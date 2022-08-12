@@ -67,7 +67,7 @@
           <div class="blank">No posts</div>
         <% else %>
           <div class="posts">
-            <% @posts.reverse.each do |post| %>
+            <% @posts.order(created_at: :desc).each do |post| %>
               <%= link_to post, class: "post" do %>
                 <% if post.content_image.content_type.include?("image")%>
                   <%= image_tag url_for(post.content_image) %>
