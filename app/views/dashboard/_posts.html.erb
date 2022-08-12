@@ -2,7 +2,7 @@
   <div class="post">
     <div class="top">
       <div class="left">
-        <%= image_tag @creator.image %>
+        <%= image_tag @creator.avatar_image.attached? ? @creator.avatar_image : "profile.jpg" %>
         <div class="details">
           <div class="name">
             <%= @creator.first_name %> <%= @creator.last_name %>

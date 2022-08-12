@@ -15,6 +15,7 @@ class Dashboard::SketchesController < ApplicationController
     def show
         @like = Like.new
         @post = Post.find(params[:id])
+        @creator = User.find_by(role: "admin")
     end
 
     private
