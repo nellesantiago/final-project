@@ -1,4 +1,8 @@
 class Post < ApplicationRecord
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :content_image, attached: true
+
   has_one_attached :content_image
 
   has_many :comments, dependent: :destroy

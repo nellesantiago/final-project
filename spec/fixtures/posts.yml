@@ -1,0 +1,17 @@
+post1:
+  id: 1
+  title: "Title"
+  description: "Description"
+  scope: "supporter"
+
+post2:
+  id: 2
+  title: "Example"
+  description: "Lorem ipsum"
+  scope: "patron"
+
+post3:
+  id: 3
+  title: "Sample"
+  description: "Lorem ipsum"
+  scope: "benefactor"

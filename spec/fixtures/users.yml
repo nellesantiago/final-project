@@ -1,0 +1,25 @@
+admin:
+  id: 2
+  first_name: "Maia"
+  last_name: "Cruz"
+  username: "maiapancake"
+  email: "maiawithlikha@gmail.com"
+  encrypted_password: "1234567890"
+  role: "admin"
+  plan: "benefactor"
+  confirmed_at: 2022-08-10 21:03:17.862914000 +0800
+  image: "profile.jpg"
+
+fan:
+  id: 1
+  first_name: "Eglecerio"
+  last_name: "Malunes"
+  username: "Kzalkin"
+  email: "egleceriom425@gmail.com"
+  encrypted_password: "1234567890"
+  role: "fan"
+  plan: "benefactor"
+  confirmed_at: 2022-08-10 21:03:17.862914000 +0800
+  updated_at: 2022-08-10 21:03:17.862914000 +0800
+  created_at: 2022-08-10 21:03:17.862914000 +0800
+  
