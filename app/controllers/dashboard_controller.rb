@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
     before_action :authenticate_user!
     before_action :confirm_role
+    before_action :check_expiry
 
     def index
         @supporter_posts = Post.where(scope: "supporter")
@@ -24,6 +25,13 @@ class DashboardController < ApplicationController
 
     def confirm_role
         redirect_to posts_path if current_user.admin?
+    end
+
+    def check_expiry
+        if !current_user.plan_expiration.future?
+            flash[:alert] = "Your #{current_user.plan} plan has expired"
+            current_user.update(plan: "supporter", plan_expiration: nil)
+        end
     end
 
 end
