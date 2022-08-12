@@ -76,3 +76,5 @@ group :development, :test do
  end
 
 gem 'webdrivers'
+
+gem 'active_storage_validations'
