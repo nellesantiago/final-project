@@ -1,6 +1,74 @@
-<% @payments.each do |payment| %>
-    <span><%= payment["attributes"]["billing"]["email"] %></span> <br>
-    <span><%= payment["attributes"]["description"].to_s.split.first %></span> </t>
-    <span>as of <%= Time.at(payment["attributes"]["paid_at"]).to_datetime.strftime('%B %e, %Y') %></span> <br>
-
-<% end %>
+<div class="subscribers">
+  <header>
+    <nav>
+      <div class="left">
+        <%= image_tag "logo.png", class: "logo" %>
+        <ul>
+          <li><%= link_to "Home", posts_path %></li>
+          <li><%= link_to "Fans", users_path %></li>
+          <li class="focus"><%= link_to "Transactions", subscribers_path %></li>
+        </ul>
+      </div>
+      <div class="right">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <% if current_user.image.blank? && !current_user.avatar_image.attached? %>
+              <%= image_tag "image.png" %>
+            <% elsif current_user.avatar_image.attached?  %>
+              <%= image_tag current_user.avatar_image %>
+            <% else %>
+              <%= image_tag current_user.image %>
+            <% end %>
+          </button>
+          <div class="dropdown-content">
+            <%= link_to "Settings", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="title">
+      <%= @payments.count %> Transactions
+    </div>
+    <div class="header">
+      <div class="label">Date</div>
+      <div class="label">Email</div>
+      <div class="label">Plan</div>
+      <div class="label">Amount</div>
+      <div class="label">Status</div>
+    </div>
+    <div class="table">
+      <% @payments.each do |payment| %>
+        <div class="date data">
+          <%= Time.at(payment["attributes"]["paid_at"]).to_datetime.strftime('%b %e, %Y') %>
+        </div>
+        <div class="email data">
+          <%= payment["attributes"]["billing"]["email"] %>
+        </div>
+        <% if payment["attributes"]["description"].to_s.split.first == "Patron" %>
+          <div class="patron-plan data">
+            <%= payment["attributes"]["description"].to_s.split.first %>
+          </div>
+        <% elsif payment["attributes"]["description"].to_s.split.first == "Benefactor" %>
+          <div class="benefactor-plan data">
+            <%= payment["attributes"]["description"].to_s.split.first %>
+          </div>
+          <% end %>
+          <div class="amount data">
+            ₱ <%= payment["attributes"]["amount"] / 100 %>
+          </div>
+          <% if payment["attributes"]["status"] == "paid" %>
+          <div class="paid-status data">
+            <%= payment["attributes"]["status"] %>
+          </div>
+          <% else %>
+          <div class="failed-status data">
+            <%= payment["attributes"]["status"] %>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
+    </main>
+  </div>
