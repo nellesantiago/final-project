@@ -1,5 +1,5 @@
 .login {
-  padding: 50px 120px;
+  padding: 50px 150px;
 
   img {
     width: 100px;
@@ -44,7 +44,7 @@
         }
 
         .create {
-          background-color: #ffe606;
+          background-color: #e0b15e;
           color: black;
           text-decoration: none;
           border-radius: 20px;
@@ -68,7 +68,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 70px;
-    padding-left: 50px;
 
     .left {
       display: flex;
@@ -119,7 +118,7 @@
 
         input[type='submit'] {
           width: 100%;
-          background-color: #ffe606;
+          background-color: #e0b15e;
           height: 50px;
           border: none;
           outline: none;
