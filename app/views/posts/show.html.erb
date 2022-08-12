@@ -104,3 +104,14 @@
     </main>
   </div>
 </div>
+<% if alert.present? %>
+<div class="alert">
+  <div class="container">
+    <div class="message">
+      <%= image_tag "alert.png" %>
+      <%= alert %>
+    </div>
+    <%= link_to "Close", post_path(@post) %>
+  </div>
+</div>
+<% end %>
